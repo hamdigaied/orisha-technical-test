@@ -7,6 +7,7 @@ import IconSearch from '@/components/icons/IconSearch.vue';
 import IconPlus from '@/components/icons/IconPlus.vue';
 import IconList from '@/components/icons/IconList.vue';
 import IconGrid from '@/components/icons/IconGrid.vue';
+import IconFilter from '@/components/icons/IconFilter.vue';
 import type { ViewMode } from './types';
 
 defineProps<{
@@ -18,6 +19,7 @@ defineEmits<{
   (e: 'update:search', value: string): void;
   (e: 'update:viewMode', value: ViewMode): void;
   (e: 'create'): void;
+  (e: 'open-filters'): void;
 }>();
 
 const viewOptions = [
@@ -42,6 +44,16 @@ const viewOptions = [
     </div>
 
     <div class="toolbar__actions">
+      <button
+        type="button"
+        class="toolbar__filters-btn"
+        aria-label="Ouvrir les filtres"
+        @click="$emit('open-filters')"
+      >
+        <IconFilter :size="18" />
+        <span>Filtres</span>
+      </button>
+
       <UiSegmentedControl
         :model-value="viewMode"
         :options="viewOptions"
@@ -51,7 +63,7 @@ const viewOptions = [
         <template #leading>
           <IconPlus :size="18" />
         </template>
-        Nouveau résident
+        <span class="toolbar__create-label">Nouveau résident</span>
       </UiButton>
     </div>
   </div>
@@ -65,15 +77,59 @@ const viewOptions = [
   gap: var(--space-xl);
   margin-bottom: var(--space-2xl);
 
+  @include until-md {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-l);
+  }
+
   &__search {
     flex: 1;
     max-width: 420px;
+
+    @include until-md {
+      max-width: none;
+    }
   }
 
   &__actions {
     display: flex;
     align-items: center;
     gap: var(--space-l);
+
+    @include until-md {
+      gap: var(--space-m);
+      flex-wrap: wrap;
+    }
+  }
+
+  &__filters-btn {
+    display: none; // desktop has the persistent sidebar — no need for the button
+    align-items: center;
+    gap: var(--space-m);
+    height: var(--size-m);
+    padding: 0 var(--space-l);
+    border-radius: var(--radius-m);
+    border: 1px solid var(--color-stroke-primary);
+    background: var(--color-bg-surface);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-m);
+
+    @include until-md {
+      display: inline-flex;
+    }
+
+    &:hover {
+      background: var(--color-bg-subtle);
+    }
+  }
+
+  // The "Nouveau résident" label collapses to icon-only on very narrow screens.
+  &__create-label {
+    @media (max-width: 480px) {
+      @include visually-hidden;
+    }
   }
 }
 </style>

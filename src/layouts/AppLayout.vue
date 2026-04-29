@@ -36,6 +36,7 @@ defineProps<{
   display: flex;
   flex-direction: column;
   background: var(--color-bg-default);
+  overflow-x: hidden; // contain any horizontal overflow so the sticky topbar stays viewport-width
 
   &__topbar {
     background: var(--color-bg-surface);
@@ -43,6 +44,7 @@ defineProps<{
     position: sticky;
     top: 0;
     z-index: 10;
+    width: 100%;
   }
 
   &__module-band {
@@ -54,6 +56,10 @@ defineProps<{
     padding: var(--space-l) var(--space-2xl);
     font-size: var(--font-size-s);
     color: var(--color-text-tertiary);
+
+    @include until-md {
+      padding: var(--space-m) var(--space-l);
+    }
 
     ol {
       display: flex;

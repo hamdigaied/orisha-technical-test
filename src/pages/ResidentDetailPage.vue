@@ -181,6 +181,17 @@ function selectSub(tab: Tab, sub: SubItem): void {
   background: var(--color-bg-surface);
   border-bottom: 1px solid var(--color-stroke-secondary);
 
+  @include until-md {
+    gap: var(--space-l);
+    padding: 0 var(--space-l);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
   &__item {
     display: inline-flex;
     align-items: center;
@@ -191,6 +202,8 @@ function selectSub(tab: Tab, sub: SubItem): void {
     color: var(--color-text-secondary);
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
+    white-space: nowrap;
+    flex-shrink: 0;
     transition:
       color 120ms ease,
       border-color 120ms ease;

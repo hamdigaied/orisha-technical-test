@@ -60,6 +60,13 @@ const physician = computed(() => props.resident.attendingPhysician);
   background: var(--color-bg-surface);
   border-bottom: 1px solid var(--color-stroke-secondary);
 
+  @include until-md {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-l);
+    padding: var(--space-l);
+  }
+
   &__body {
     display: flex;
     flex-direction: column;
@@ -71,6 +78,10 @@ const physician = computed(() => props.resident.attendingPhysician);
     font-size: var(--font-size-xl);
     font-weight: var(--font-weight-bold);
     color: var(--color-text-title);
+
+    @include until-md {
+      font-size: var(--font-size-l);
+    }
   }
 
   &__chips {

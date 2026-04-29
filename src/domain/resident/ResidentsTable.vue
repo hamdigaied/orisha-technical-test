@@ -38,7 +38,8 @@ function cancelFilter(): void {
 
 <template>
   <div class="table-card">
-    <table class="table">
+    <div class="table-card__scroll">
+      <table class="table">
       <thead>
         <tr>
           <th scope="col">
@@ -111,6 +112,7 @@ function cancelFilter(): void {
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </template>
 
@@ -120,12 +122,23 @@ function cancelFilter(): void {
   border-radius: var(--radius-l);
   box-shadow: var(--shadow-s);
   overflow: hidden;
+
+  &__scroll {
+    @include until-md {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
   font-size: var(--font-size-m);
+
+  @include until-md {
+    min-width: 720px; // forces horizontal scroll instead of squeezing columns
+  }
 
   thead th {
     text-align: left;

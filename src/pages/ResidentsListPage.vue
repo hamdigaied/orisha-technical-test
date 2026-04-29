@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SectorsSidebar from '@/domain/resident/SectorsSidebar.vue';
@@ -25,6 +25,8 @@ const {
 const count = computed(() => filtered.value.length);
 const hasResults = computed(() => count.value > 0);
 
+const sidebarOpen = ref(false);
+
 function goToResident(id: string): void {
   router.push({ name: 'resident-detail', params: { id }, query: { tab: 'synthese' } });
 }
@@ -34,6 +36,7 @@ function goToResident(id: string): void {
   <AppLayout :breadcrumb="[{ label: 'Résidence du centre ville' }, { label: 'Résidents' }]">
     <div class="residents">
       <SectorsSidebar
+        v-model:open="sidebarOpen"
         :sectors="sectors"
         :selected-sub-sector-id="selectedSubSectorId"
         @select="selectSubSector"
@@ -50,6 +53,7 @@ function goToResident(id: string): void {
           :view-mode="viewMode"
           @update:search="setSearch"
           @update:view-mode="setViewMode"
+          @open-filters="sidebarOpen = true"
         />
 
         <ResidentsTable
@@ -79,6 +83,10 @@ function goToResident(id: string): void {
     min-width: 0;
     padding: var(--space-2xl);
     overflow-y: auto;
+
+    @include until-md {
+      padding: var(--space-l);
+    }
   }
 
   &__header {
@@ -92,6 +100,10 @@ function goToResident(id: string): void {
       font-weight: var(--font-weight-bold);
       color: var(--color-text-title);
       letter-spacing: -0.01em;
+
+      @include until-md {
+        font-size: var(--font-size-2xl);
+      }
     }
   }
 
