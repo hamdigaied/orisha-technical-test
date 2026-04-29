@@ -1,0 +1,146 @@
+/* =============================================================================
+ * Design tokens — 3-tier architecture mirroring Figma:
+ *   Primitives  →  Semantic (Design Tokens)  →  Module
+ *
+ * Components MUST consume only --color-*, --space-*, --radius-*, --font-* from
+ * the semantic / module layers — never the primitives directly. This is what
+ * lets us reskin per module by overriding a single block.
+ * ============================================================================= */
+
+:root {
+  /* ---------------------------------------------------------------------------
+   * 1. PRIMITIVES — raw values. Do not consume directly in components.
+   * --------------------------------------------------------------------------- */
+
+  /* Neutral / Grey */
+  --grey-50: #f9fafb;
+  --grey-100: #f3f4f6;
+  --grey-200: #e5e7eb;
+  --grey-300: #d1d5db;
+  --grey-400: #9ca3af;
+  --grey-500: #6b7280;
+  --grey-600: #4b5563;
+  --grey-700: #374151;
+  --grey-800: #1f2937;
+  --grey-900: #111827;
+  --grey-950: #090d17;
+
+  /* Brand / NETSoins (violet ramp) */
+  --netsoins-50: #f5f3ff;
+  --netsoins-100: #ede9fe;
+  --netsoins-200: #ddd6fe;
+  --netsoins-300: #c4b5fd;
+  --netsoins-400: #a78bfa;
+  --netsoins-500: #8b5cf6;
+  --netsoins-600: #7c3aed;
+  --netsoins-700: #6d28d9;
+  --netsoins-800: #5b21b6;
+  --netsoins-900: #4c1d95;
+  --netsoins-950: #2e1065;
+
+  /* Semantic ramps (used for badges & feedback states) */
+  --green-50: #ecfdf5;
+  --green-100: #d1fae5;
+  --green-600: #059669;
+  --green-700: #047857;
+
+  --orange-50: #fff7ed;
+  --orange-100: #ffedd5;
+  --orange-600: #ea580c;
+  --orange-700: #c2410c;
+
+  --red-50: #fef2f2;
+  --red-100: #fee2e2;
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+
+  --blue-50: #eff6ff;
+  --blue-100: #dbeafe;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+
+  /* Sizes (px) */
+  --size-xxs: 20px;
+  --size-xs: 24px;
+  --size-s: 32px;
+  --size-m: 40px;
+  --size-l: 48px;
+
+  /* Gap / spacing scale (px) */
+  --space-0: 0;
+  --space-xs: 2px;
+  --space-s: 4px;
+  --space-m: 8px;
+  --space-l: 12px;
+  --space-xl: 16px;
+  --space-2xl: 24px;
+  --space-3xl: 32px;
+  --space-4xl: 40px;
+  --space-5xl: 56px;
+  --space-6xl: 64px;
+  --space-7xl: 80px;
+
+  /* Radius */
+  --radius-xs: 4px;
+  --radius-s: 6px;
+  --radius-m: 8px;
+  --radius-l: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 999px;
+
+  /* Typography */
+  --font-family-base: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-size-xs: 12px;
+  --font-size-s: 13px;
+  --font-size-m: 14px;
+  --font-size-l: 16px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 28px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-tight: 1.2;
+  --line-height-base: 1.5;
+
+  /* Elevation */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-s: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-m: 0 4px 12px rgba(15, 23, 42, 0.08);
+
+  /* ---------------------------------------------------------------------------
+   * 2. SEMANTIC — what components consume.
+   * --------------------------------------------------------------------------- */
+
+  /* Backgrounds */
+  --color-bg-default: var(--grey-50);
+  --color-bg-surface: #ffffff;
+  --color-bg-subtle: var(--grey-100);
+
+  /* Text */
+  --color-text-title: var(--grey-950);
+  --color-text-primary: var(--grey-900);
+  --color-text-secondary: var(--grey-700);
+  --color-text-tertiary: var(--grey-500);
+  --color-text-placeholder: var(--grey-400);
+  --color-text-invert: #ffffff;
+  --color-text-link: var(--color-module-primary);
+  --color-text-error: var(--red-600);
+  --color-text-warning: var(--orange-700);
+  --color-text-success: var(--green-700);
+
+  /* Stroke */
+  --color-stroke-primary: var(--grey-300);
+  --color-stroke-secondary: var(--grey-200);
+  --color-stroke-focus: var(--color-module-primary);
+
+  /* ---------------------------------------------------------------------------
+   * 3. MODULE — per-product theming layer.
+   *    Override these (or the entire block) to reskin for another module.
+   * --------------------------------------------------------------------------- */
+
+  --color-module-primary: var(--netsoins-800);
+  --color-module-primary-hover: var(--netsoins-900);
+  --color-module-primary-soft: var(--netsoins-50);
+}
